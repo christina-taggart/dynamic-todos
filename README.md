@@ -1,20 +1,12 @@
-## Dynamic Elements and Events
+# Dynamic Elements and Events
 
-1. [Learning Objectives](#learning-objectives)
-1. [Summary](#summary)
-1. [Releases](#releases)
-1. [Helpful Resources](#helpful-resources)
+## Learning Competencies
 
-#### ** DO NOT MERGE SOLUTION PULL REQUESTS INTO THIS REPOSITORY **
-
-## Learning Objectives
-* I use jQuery to implement Event Delegation with the `on` function
-  * I separate my view concerns from my data verification concerns
-  * I use AJAX to retrieve partials from the server and replace or append
-   them to a website
-  * I use AJAX to retrieve JSON from the server and then modify the page based on
-   the JSON
-  * I use MustacheJS or underscores templating library to convert JSON to HTML
+* Use jQuery to implement Event Delegation with the `on` function
+* Separate my view concerns from my data verification concerns
+* Use AJAX to retrieve partials from the server and replace or append them to a website
+* Use AJAX to retrieve JSON from the server and then modify the page based on the JSON
+* Use MustacheJS or Underscore template libraries to convert JSON to HTML
 
 ## Summary
 
@@ -26,13 +18,11 @@ Understanding how to bind and handle events is a core part of being a web develo
 
 This should provide you with a solid foundation to complete the remaining features.
 
-
-
 ## Releases
 
-This challenge requires you to manipulate objects that have been added dynamically. You may want to brush up on [Event Delegation](http://davidwalsh.name/event-delegate).
+This challenge requires you to manipulate objects that have been added dynamically. You may want to brush up on [Event Delegation][event-delegation].
 
-### Release 1
+### Release 0 : Up and Running
 Verify that the existing application runs before modifying.  Then add the following features:
 
 1. A todo may be added to the page.
@@ -41,16 +31,14 @@ Verify that the existing application runs before modifying.  Then add the follow
 
 (Hint: Create named functions and bind them to the appropriate buttons)
 
-### Release 2
+### Release 1 : Drag and Drop
 
 When creating lists, you often want to reorder them. Use [HTML5 Drag and Drop](http://www.html5rocks.com/en/tutorials/dnd/basics/) events to allow manual sorting of the todo list.
 
-### Release 3
-
-Journal your learning - discuss how your code and coding process illustrates the objectives.  See if you can describe this to another student or a teacher, both in the code and without looking at the code.
-
-### Release 4
+### Release 2 : Using Template Code
 * Redo this challenge using a template language like Mustache.js
 
-## Helpful Resources
-* [Event Delegation](http://davidwalsh.name/event-delegate)
+## Resources
+* [Event Delegation][event-delegation]
+
+[event-delegation]: http://davidwalsh.name/event-delegate
