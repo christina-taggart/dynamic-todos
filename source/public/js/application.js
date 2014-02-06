@@ -13,7 +13,7 @@ $(document).ready(function() {
           url: this.action,
           data: formData
         }).done(function(serverResponse) {
-          console.log(serverResponse)
+          $('.todo_list').append(buildTodo(serverResponse));
         })
     })
 

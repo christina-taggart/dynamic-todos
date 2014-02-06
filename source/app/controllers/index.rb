@@ -1,4 +1,5 @@
 get '/' do
+  @todos = Todo.all
   erb :index
 end
 
