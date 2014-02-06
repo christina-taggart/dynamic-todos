@@ -11,3 +11,15 @@
 .todo.complete h2 {
   text-decoration: line-through;
 }
+
+li{
+  list-style: none;
+}
+
+.todo_list {
+  text-align: center;
+}
+
+li a {
+  text-align: center;
+}

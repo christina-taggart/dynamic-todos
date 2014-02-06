@@ -1,9 +1,18 @@
 $(document).ready(function() {
   var todoTemplate = $.trim($('#todo_template').html());
 
-  function bindEvents() {
-    // Bind functions which add, remove, and complete todos to the appropriate
-    // elements
+  function bindEvents().submit(function(event)) {
+    $('.add').on('click', function(event){
+      event.preventDefault
+    })
+
+    $('.complete').on('click', function(event){
+      event.preventDefault
+    })
+
+    $('.delete').on('click', function(event){
+      event.preventDefault
+    })
   }
 
   //Create functions to add, remove and complete todos
