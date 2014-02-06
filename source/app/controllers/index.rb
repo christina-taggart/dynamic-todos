@@ -10,10 +10,14 @@ post '/add_todo' do
 end
 
 put '/:id/edit' do
-  @todo = Todo.find(params[:id]).update_attributes(complete: true)
+  @todo = Todo.find(params[:id]).update_attributes(completed: true)
+  redirect '/'
 end
 
 delete '/:id/remove' do
-  @todo = Todo.find(:id).destroy_all
+  p "These are the params"
+  p params
+  @todo = Todo.find(params[:id])
+  @todo.destroy
   redirect '/'
 end

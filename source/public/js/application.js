@@ -8,14 +8,17 @@ $(document).ready(function() {
 
     $('.complete').on('click', function(event){
       event.preventDefault
+      completeToDo(this);
     })
 
-    $('.delete').on('click', function(event){
+    $('.delete').on('submit', function(event){
       event.preventDefault
-    })
-  }
+      deleteToDo(this);
+    });
+  });
 
   //Create functions to add, remove and complete todos
+
 
 
 
@@ -31,3 +34,12 @@ $(document).ready(function() {
 
   bindEvents();
 });
+
+deleteToDo = function(todo){
+  $.ajax({
+    type: "DELETE",
+    url: "/:id/remove",
+    data: {"id": is it this?}
+  })
+  })
+}
