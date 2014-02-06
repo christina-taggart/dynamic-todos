@@ -1,5 +1,5 @@
 get '/' do
-  @todos = Todo.all #order(created_at: :desc)
+  @todos = Todo.order('id')
   erb :index
 end
 
@@ -8,8 +8,15 @@ post '/add_todo' do
   redirect '/'
 end
 
+put '/todo/:id' do
+  todo = Todo.find(params[:id])
+  todo.toggle(:completed)
+  todo.save
+  200
+end
+
 delete '/todo/:id' do
   Todo.destroy(params[:id])
-  @todos = Todo.all
+  @todos = Todo.order('id')
   erb :todo, layout: false
 end

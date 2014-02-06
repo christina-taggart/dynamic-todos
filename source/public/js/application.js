@@ -6,6 +6,10 @@ $(document).ready(function() {
       event.preventDefault();
       deleteTodo(this);
     });
+
+    $('.complete').on("click", function(){
+      completeTodo(this);
+    })
   }
 
   //Create functions to add, remove and complete todos
@@ -25,13 +29,24 @@ $(document).ready(function() {
   bindEvents();
 });
 
-function deleteTodo(thing) {
+function deleteTodo(todo) {
   $.ajax({
     type: "DELETE",
-    url: thing.action,
+    url: todo.action,
   }).done(function(response){
     $(".todo_list").html(response)
   }).fail(function(){
     console.log("failed")
+  })
+}
+
+function completeTodo(todo){
+  $.ajax({
+    type: "PUT",
+    url: todo.value,
+  }).done(function(){
+    console.log("SUCCESS")
+  }).fail(function(){
+    console.log("FAIL")
   })
 }
