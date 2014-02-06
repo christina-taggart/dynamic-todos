@@ -37,9 +37,13 @@ function buildTodo(todo) {
   })
 }
 
+function todoTemplate(){
+  return "<div class='draggable'><input class='complete' type='checkbox' name='completed'/><li>{{content}}</li><form class='delete' action='/todo/'><input type='submit' value='Delete'></form></div>"
+}
+
 function renderTodo(todo) {
   var view = {content: $(todo).find("input[name=todo_content]").val()}
-  var template = "<li>{{content}}</li>"
+  var template = todoTemplate();
   var toView = Mustache.render(template, view);
   $(".todo_list ul").append(toView);
 }
