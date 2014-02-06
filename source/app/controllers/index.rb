@@ -5,7 +5,6 @@ end
 
 post '/add_todo' do
   Todo.create(todo_content: params[:todo_content])
-  redirect '/'
 end
 
 put '/todo/:id' do

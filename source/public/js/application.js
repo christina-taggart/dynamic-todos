@@ -1,33 +1,48 @@
+function bindEvents() {
+  $('.todo_list').on("submit", ".delete", function(event){
+    event.preventDefault();
+    deleteTodo(this);
+  });
+
+  $('.todo_list').on("click", ".complete", function(){
+    completeTodo(this);
+  })
+
+  $('.add-todo').on("submit", function(event){
+    event.preventDefault();
+    buildTodo(this);
+    renderTodo(this);
+  })
+
+  $('.draggable').on('dragstart', handleDragStart)
+  $('.draggable').on('dragenter', handleDragEnter)
+  $('.draggable').on('dragover', handleDragOver)
+  $('.draggable').on('dragleave', handleDragLeave)
+  $('.draggable').on('drop', handleDrop)
+  $('.draggable').on('dragend', handleDragEnd)
+}
+
 $(document).ready(function() {
   var todoTemplate = $.trim($('#todo_template').html());
-
-  function bindEvents() {
-    $('.delete').on("submit", function(event){
-      event.preventDefault();
-      deleteTodo(this);
-    });
-
-    $('.complete').on("click", function(){
-      completeTodo(this);
-    })
-  }
-
-  //Create functions to add, remove and complete todos
-
-
-
-  function buildTodo(todoName) {
-    // Creates an jQueryDOMElement from the todoTemplate.
-    var $todo = $(todoTemplate);
-    // Modifies it's text to use the passed in todoName.
-    $todo.find('h2').text(todoName);
-    // Returns the jQueryDOMElement to be used elsewhere.
-    return $todo;
-  }
-
-
   bindEvents();
 });
+
+function buildTodo(todo) {
+  $.ajax({
+    type: "POST",
+    url: todo.action,
+    data: {todo_content: $(todo).find("input[name=todo_content]").val()}
+  }).done(function(){
+
+  })
+}
+
+function renderTodo(todo) {
+  var view = {content: $(todo).find("input[name=todo_content]").val()}
+  var template = "<li>{{content}}</li>"
+  var toView = Mustache.render(template, view);
+  $(".todo_list ul").append(toView);
+}
 
 function deleteTodo(todo) {
   $.ajax({
@@ -49,4 +64,49 @@ function completeTodo(todo){
   }).fail(function(){
     console.log("FAIL")
   })
+}
+
+// Drag and drop code below
+var dragSourceElement = null;
+
+function handleDragStart(e){
+  this.style.opacity = '0.4';
+
+  dragSourceElement = this;
+    // debugger
+    e.originalEvent.dataTransfer.effectAllowed = 'move';
+    e.originalEvent.dataTransfer.setData('text/html', this.innerHTML);
+}
+
+function handleDragEnter(e){
+  this.classList.add('over')
+}
+
+function handleDragLeave(e){
+  this.classList.remove('over')
+}
+
+function handleDragEnd(e){
+  this.style.opacity = '1';
+}
+
+function handleDragOver(e){
+  if (e.stopPropagation){
+    e.stopPropagation();
+  }
+
+  e.originalEvent.dataTransfer.dropEffect = 'move';
+  return false;
+}
+
+function handleDrop(e){
+  if (e.stopPropagation){
+    e.stopPropagation();
+  }
+
+  if (dragSourceElement != this){
+    dragSourceElement.innerHTML = this.innerHTML;
+    this.innerHTML = e.originalEvent.dataTransfer.getData('text/html');
+  }
+  return false;
 }
