@@ -1,23 +1,8 @@
-<div id="todo">
-  <div class="toolbox">
-    <form action="/add_todo" method="post">
-      <input type="text" class="todo" value="Put your todo item here!"/>
-      <input type="submit" value="Add Todo"/>
-      <!-- <button class="add" type="submit">Add Todo</button> -->
-    </form>
-  </div>
+<h1>Todo App </h1>
+<%= erb :task_creation %>
+<br><h2>Your Tasks</h2>
 
-  <div class="todo_list">
+<ul id="task-list">
+  <%= erb :task_list, locals => @tasks %>
+</ul>
 
-  </div>
-
-  <div id="todo_template" style="display: none;">
-    <div class="todo">
-      <h2>Todo Name</h2>
-      <ul>
-        <li><a href="#" class="delete">Delete</a></li>
-        <li><a href="#" class="complete">Complete</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
