@@ -1,0 +1,15 @@
+<ul>
+  <% @todos.each do |todo| %>
+    <li>
+      <form class="update" action="/todo/<%= todo.id %>">
+        <input type="checkbox" name="completed" <% if todo.completed %>checked<% end %> />
+        <%= todo.todo_content %>
+        <input type="submit" value="Complete!">
+      </form>
+      <form class="delete" action="/todo/<%= todo.id %>">
+        <%= todo.id %>
+        <input type="submit" value="Delete">
+      </form>
+    </li>
+  <% end %>
+</ul>
