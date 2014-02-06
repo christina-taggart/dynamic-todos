@@ -11,7 +11,8 @@ end
 post '/created' do
 	Task.create(params)
 	@task = Task.last
-	erb :created_task, :layout => false
+	@task.to_json
+	# erb :created_task, :layout => false
 end
 
 delete '/:task_id/deleted' do

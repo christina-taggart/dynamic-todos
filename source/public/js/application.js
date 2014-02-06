@@ -5,10 +5,22 @@ $(document).ready(function() {
       type: 'post',
       url: '/created',
       data: $(this).serialize()
-    }).done(function(erb) {
-      $('#task-list').append(erb)
-    })
+    }).done(function(json) {
+      // $('#task-list').append(erb)
+        var task = $.parseJSON(json).task;
+        var template = "<h3>{{title}}</h3><br>{{content}}<br><a class='delete-button' href='/{{id}}/deleted'>Delete task</a><a class='edit-button' href='/{{id}}/edit'>Edit task</a><a class='complete-button' href='/{{id}}/complete'>Complete task</a>";
+        var html = Mustache.to_html(template, task);
+        console.log(task);
+        $('#task-list').append(html); //add div at the end
+
+    });
   })
+
+//   $.getJSON('json/data.json', function(data) {
+//     var template = "<h1>{{firstName}} {{lastName}}</h1>Blog: {{blogURL}}";
+//     var html = Mustache.to_html(template, data);
+//     $('#sampleArea').html(html);
+// });
 
   $(document).on("click", '.delete-button', function(e){
     e.preventDefault();
@@ -50,6 +62,9 @@ $(document).ready(function() {
       $("#" + id).replaceWith(erb)
     })
   })
+
+
+
 
 
 
