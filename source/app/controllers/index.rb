@@ -8,6 +8,6 @@ post '/add_todo' do
   p params
 
   @todo = Todo.create(todo_content: params["todo_content"])
-  @todo.todo_content
+  @todo.to_json
 end
 

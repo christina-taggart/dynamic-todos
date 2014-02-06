@@ -8,8 +8,11 @@ $(document).ready(function() {
       event.preventDefault()
       var send_todo = $( this ).serialize()
       $.post( '/add_todo', send_todo )
-        .done( function(todo_text) {
-          alert('todo_text is: ' + todo_text)
+        .done( function(todo_json) {
+          json_parsed_todo = $.parseJSON(todo_json);
+          // alert('todo_content is: ' + json_parsed_todo.todo.todo_content)
+          $('.todo_list').append(buildTodo(json_parsed_todo.todo.todo_content))
+          debugger
         })
     })
   }
