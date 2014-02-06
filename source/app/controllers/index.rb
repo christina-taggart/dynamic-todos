@@ -6,11 +6,8 @@ end
 post '/add_todo' do
   p "Inside /add_todo route!"
   p params
-  dog = {}
 
-  dog[:todo_content] = 'fake jello'
-  p "dog params: #{dog}"
-  @todo = Todo.create(dog)
-  @todo.todo_content.to_s
+  @todo = Todo.create(todo_content: params["todo_content"])
+  @todo.todo_content
 end
 
