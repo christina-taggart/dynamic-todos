@@ -11,3 +11,12 @@ post '/add_todo' do
   @todo.to_json
 end
 
+delete '/delete_todo/:id' do
+  @todo = Todo.delete(params[:id])
+  params[:id].to_json
+end
+
+put '/complete_todo/:id' do
+  @todo = Todo.find(params[:id]).update_attributes(completed: true)
+  params[:id].to_json
+end

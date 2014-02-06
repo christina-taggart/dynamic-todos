@@ -11,9 +11,10 @@ $(document).ready(function() {
         .done( function(todo_json) {
           json_parsed_todo = $.parseJSON(todo_json);
           // alert('todo_content is: ' + json_parsed_todo.todo.todo_content)
-          $('.todo_list').append(buildTodo(json_parsed_todo.todo.todo_content))
-          debugger
+          $('.todo_list').append(buildTodo(json_parsed_todo))
+          // debugger
         })
+
     })
   }
 
@@ -21,11 +22,16 @@ $(document).ready(function() {
 
 
 
-  function buildTodo(todoName) {
+  function buildTodo(todoJSON) {
     // Creates an jQueryDOMElement from the todoTemplate.
     var $todo = $(todoTemplate);
     // Modifies its text to use the passed in todoName.
-    $todo.find('h2').text(todoName);
+    $todo.attr('id', 'todoid-'+todoJSON.todo.id)
+    $todo.find('h2').text(todoJSON.todo.todo_content);
+    $todo.find('.delete').attr('href','/delete_todo/'+todoJSON.todo.id)
+    $todo.find('.delete').attr('onclick','deleteTodo.call(this, event)')
+    $todo.find('.complete').attr('href','/complete_todo/'+todoJSON.todo.id)
+    $todo.find('.complete').attr('onclick','completeTodo.call(this, event)')
     // Returns the jQueryDOMElement to be used elsewhere.
     return $todo;
   }
@@ -33,3 +39,32 @@ $(document).ready(function() {
 
   bindEvents();
 });
+
+
+function deleteTodo(event) {
+  event.preventDefault()
+  console.log('clicked delete')
+  $.ajax({
+    url: $(this).attr('href'),
+    type: 'DELETE',
+    success: function(result) {
+      the_id = $.parseJSON(result)
+      $('#todoid-'+the_id).remove()
+    }
+  })
+}
+
+
+function completeTodo(event) {
+  event.preventDefault()
+  console.log('clicked complete')
+  $.ajax({
+    url: $(this).attr('href'),
+    type: 'PUT',
+    success: function(result) {
+      the_id = $.parseJSON(result)
+      $('#todoid-'+the_id).addClass('completed')
+      $('#todoid-'+the_id).find('.complete').parent().remove()
+    }
+  })
+}
