@@ -1,4 +1,4 @@
-<li id="<%= @task.id %>">
+<li id="<%= @task.id %>" draggable="true">
 <h3><%= @task.title%></h3>
   <%= @task.content %><br>
   <a class='delete-button' href="/<%= @task.id %>/deleted">Delete task</a>
@@ -6,6 +6,6 @@
   <a class='complete-button' href="/<%= @task.id %>/complete">Complete task</a>
 
   <% if @task.completed == 1 %>
-    <h1>Check Mark</h1>
+    <div class="check-mark">Check Mark</div>
 <% end %>
 </li>
