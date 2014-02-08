@@ -1,9 +1,12 @@
 get '/' do
-  # Look in app/views/index.erb
+  @todos = Todo.all
   erb :index
 end
 
 post '/add_todo' do
-  p "Inside /add_todo route!"
+  p params
+  p "$$$$$$$"
+  @todo_to_add = Todo.create(todo_content: params[:item_added])
+  return @todo_to_add.todo_content
 end
 

@@ -1,24 +1,35 @@
 $(document).ready(function() {
-  var todoTemplate = $.trim($('#todo_template').html());
-
-  function bindEvents() {
-    // Bind functions which add, remove, and complete todos to the appropriate
-    // elements
-  }
-
-  //Create functions to add, remove and complete todos
-
-
-
-  function buildTodo(todoName) {
-    // Creates an jQueryDOMElement from the todoTemplate.
-    var $todo = $(todoTemplate);
-    // Modifies it's text to use the passed in todoName.
-    $todo.find('h2').text(todoName);
-    // Returns the jQueryDOMElement to be used elsewhere.
-    return $todo;
-  }
+  $('#add_todo').on("submit", function(e){
+    e.preventDefault();
+    var item_added = $('#todo_input').val()
+    $.ajax({
+      method: "POST",
+      url: "/add_todo",
+      data: $('#todo_input').val()
+    }).done(function(response_from_ruby) {
+      $("#todo_title").text(response_from_ruby)
+      var template = $('#todo_template').html()
+      $('.todo_list').append(template)
+      $("#todo_input").val("")
+    });
 
 
-  bindEvents();
+
+
+  })
+
+  // $('ul').on('click', '.delete', function(){
+  //   $(this).hide()
+  //   console.log("work")
+  // })
+
+
+
+
+
+
+
+
+
+
 });
